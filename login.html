@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Air University Food Ordering Login</title>
+  <link rel="icon" href="download.jpg" type="image/jpeg">
+
+  <style>
+  body {
+  margin: 0;
+  padding: 0;
+  background: #000c1a url('https://www.transparenttextures.com/patterns/stardust.png');
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #f0f0f0;
+}
+
+.login-box {
+  background: rgba(0, 10, 20, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 340px;
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.5);
+}
+
+.login-box img {
+  width: 70px;
+  margin-bottom: 1rem;
+}
+
+.login-box h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #3399ff;
+  text-transform: uppercase;
+}
+
+.login-box h3 {
+  margin: 0.3rem 0 1.5rem;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #aaa;
+}
+
+.login-box input,
+.login-box select,
+.login-box button {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #111a2a;
+  color: #f0f0f0;
+  padding: 0 0.75rem;
+  box-sizing: border-box;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.login-box input:focus,
+.login-box select:focus {
+  outline: none;
+  border-color: #3399ff;
+  background: #1a2b3f;
+}
+
+.login-box button {
+  background: #0066cc;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box button:hover {
+  background: #0052a3;
+  box-shadow: 0 0 10px #007bff88;
+}
+
+.login-box a {
+  display: block;
+  margin-top: 0.75rem;
+  color: #88aacc;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-box a:hover {
+  color: #fff;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <img src="logo.jpg" alt="Logo" />
+    <h1>AIR UNIVERSITY FOOD ORDERING SYSTEM</h1>
+    <h3>Login to place your order</h3>
+
+    <!-- Redirects to home.html on submit -->
+    <form action="login.php" method="get">
+      <input type="242004" name="username" placeholder="Username" required />
+      <input type="malaikas" name="password" placeholder="Password" required />
+      
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+      </select>
+
+      <button type="submit">LOG IN</button>
+    </form>
+
+    <a href="#">Forgot password?</a>
+    <a href="signup.html">Don't have an account? Sign up</a>
+
+  </div>
+
+</body>
+</html>

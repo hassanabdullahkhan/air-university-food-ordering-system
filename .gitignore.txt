@@ -1,0 +1,16 @@
+# Visual Studio
+.vs/
+
+# VS Code local settings
+.vscode/
+
+# Environment / secrets
+.env
+.env.*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

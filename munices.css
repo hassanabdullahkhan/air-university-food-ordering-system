@@ -1,0 +1,217 @@
+/* General styles */
+body {
+  background: #121212;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+header, footer {
+  background-color: #1f1f1f;
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: 2px solid #333;
+}
+
+footer {
+  border-top: 2px solid #333;
+  border-bottom: none;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Main container */
+main {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* Section headings */
+h2, h3 {
+  color: #f5a623;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Login form */
+#login-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+#login-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #ddd;
+  min-width: 140px;
+}
+
+#login-form input[type="text"],
+#login-form select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
+
+#login-form input[type="text"]:focus,
+#login-form select:focus {
+  outline: none;
+  border-color: #f5a623;
+}
+
+/* Buttons */
+button {
+  background-color: #f5a623;
+  border: none;
+  border-radius: 4px;
+  color: #121212;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+button:hover {
+  background-color: #d18e00;
+}
+
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+/* Cafes checkboxes container */
+#cafes-checkboxes {
+  margin-bottom: 1rem;
+}
+
+#cafes-checkboxes label {
+  margin-right: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ccc;
+  user-select: none;
+}
+
+#cafes-checkboxes input[type="checkbox"] {
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+/* Menu grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.menu-item {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(245, 166, 35, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-4px);
+}
+
+.menu-item h3 {
+  margin: 0 0 0.4rem 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #f5a623;
+}
+
+.menu-item p {
+  margin: 0 0 0.8rem 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #eee;
+}
+
+/* Cart styles */
+#cart {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+#cart li {
+  background-color: #1e1e1e;
+  border-radius: 4px;
+  margin-bottom: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+  box-shadow: inset 0 0 5px rgba(245, 166, 35, 0.3);
+}
+
+/* Total price */
+p strong {
+  color: #f5a623;
+  font-size: 1.1rem;
+}
+
+/* Bill output */
+#bill-output {
+  background-color: #1a1a1a;
+  color: #f5a623;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+/* Office boy delivery log */
+.office-boy-log {
+  background-color: #171717;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #ccc;
+  max-height: 160px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(245, 166, 35, 0.1);
+}
+
+/* Logout button styling */
+#logout-btn {
+  background-color: #c62828;
+  margin-top: 1.5rem;
+}
+
+#logout-btn:hover {
+  background-color: #a21e1e;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #login-form {
+    flex-direction: column;
+  }
+
+  #login-form label {
+    min-width: auto;
+  }
+}

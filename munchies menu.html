@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cafe Aroma - Order Menu</title>
+  <style>
+    /* --- Your original styles unchanged --- */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000000;
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #0C53A6;
+      color: #ffffff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    main.menu {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .category-filter {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .category-filter label {
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    .category-filter select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      background-color: #1b1b1b;
+      color: #ffffff;
+      border: 1px solid #0C53A6;
+      border-radius: 4px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .menu-item {
+      background: #1b1b1b;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item h3 {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      color: #0C53A6;
+    }
+
+    .menu-item p {
+      margin: 0.5rem 0;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .menu-item button {
+      padding: 0.5rem 1rem;
+      background: #0C53A6;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .menu-item button:hover {
+      background: #003D82;
+    }
+
+    #cart {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart li {
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background: #0C53A6;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #003D82;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #0C53A6;
+      color: #ffffff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MUNCHIES</h1>
+    <p>Delicious bites and bold brews to fuel your day!</p>
+  </header>
+
+  <main class="menu">
+    <h2>Menu</h2>
+
+    <div class="category-filter">
+      <label for="category">Choose a category:</label>
+      <select id="category" onchange="filterMenu()">
+        <option value="all">All</option>
+        <option value="burgers">Burgers</option>
+        <option value="sandwiches">Sandwiches</option>
+        <option value="beverages">Beverages</option>
+        <option value="desserts">Desserts</option>
+      </select>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Menu items will be inserted here by JavaScript -->
+    </div>
+
+    <h2>Cart</h2>
+    <ul id="cart"></ul>
+    <p><strong>Total:</strong> ₨<span id="total">0.00</span></p>
+    <button onclick="placeOrder()">Place Order</button>
+    <button onclick="clearCart()">Clear Cart</button>
+
+    <!-- Hidden form to submit the order -->
+    <form id="orderForm" action="place_order.php" method="post" style="display:none;"></form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Cafe Aroma. Part of the University Food Court.</p>
+  </footer>
+
+  <script>
+    const menuItems = [
+      { id: 1, name: 'Burger', price: 350, category: 'burgers', image: 'img/burger 1.jpg' },
+      { id: 2, name: 'Grilled Cheese Sandwich', price: 300, category: 'sandwiches', image: 'img/grilled cheese 1.jpg' },
+      { id: 3, name: 'Chicken Sandwich', price: 450, category: 'sandwiches', image: 'img/chicken sandwhich 1.jpg' },
+      { id: 4, name: 'Veggie Wrap', price: 400, category: 'sandwiches', image: 'img/veggie wrap 1.jpg' },
+      { id: 5, name: 'Latte', price: 325, category: 'beverages', image: 'img/latte 1.jpg' },
+      { id: 6, name: 'Mocha', price: 350, category: 'beverages', image: 'img/mocha 1.jpg' },
+      { id: 7, name: 'Iced Tea', price: 375, category: 'beverages', image: 'img/iced tea 1.jpg' },
+      { id: 8, name: 'Cappuccino', price: 425, category: 'beverages', image: 'img/cappucino 1.jpg' },
+      { id: 9, name: 'Chocolate Muffin', price: 200, category: 'desserts', image: 'img/c muffin 1.jpg' },
+      { id: 10, name: 'Blueberry Muffin', price: 300, category: 'desserts', image: 'img/b muffin 1.jpg' },
+      { id: 11, name: 'Brownie', price: 300, category: 'desserts', image: 'img/brownie 1.jpg' },
+      { id: 12, name: 'Glazed Doughnuts', price: 250, category: 'desserts', image: 'img/doughnuts 1.jpg' }
+    ];
+
+    const cart = [];
+
+    function displayMenu(items) {
+      const menuGrid = document.getElementById('menuGrid');
+      menuGrid.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <p>₨${item.price}</p>
+          <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Cart</button>
+        `;
+        menuGrid.appendChild(div);
+      });
+    }
+
+    function filterMenu() {
+      const category = document.getElementById('category').value;
+      if (category === 'all') {
+        displayMenu(menuItems);
+      } else {
+        const filteredItems = menuItems.filter(item => item.category === category);
+        displayMenu(filteredItems);
+      }
+    }
+
+    function addToCart(id, name, price) {
+      const existingItem = cart.find(cartItem => cartItem.id === id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart');
+      const totalDisplay = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(({ id, name, price, quantity }, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${name} - ₨${price} x ${quantity} = ₨${(price * quantity).toFixed(2)}
+          <button onclick="decreaseQuantity(${index})">-</button>
+          <button onclick="increaseQuantity(${index})">+</button>
+        `;
+        cartList.appendChild(li);
+        total += price * quantity;
+      });
+
+      totalDisplay.textContent = total.toFixed(2);
+    }
+
+    function increaseQuantity(index) {
+      cart[index].quantity++;
+      updateCart();
+    }
+
+    function decreaseQuantity(index) {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+      } else {
+        cart.splice(index, 1);
+      }
+      updateCart();
+    }
+
+    function clearCart() {
+      cart.length = 0;
+      updateCart();
+    }
+
+    function placeOrder() {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      const orderForm = document.getElementById('orderForm');
+      orderForm.innerHTML = ''; // Clear previous inputs
+
+      // Add hidden inputs for each item ID repeated by quantity
+      cart.forEach(({ id, quantity }) => {
+        for (let i = 0; i < quantity; i++) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'food_ids[]';
+          input.value = id;  // send item id to backend
+          orderForm.appendChild(input);
+        }
+      });
+
+      // Add total price hidden input
+      const totalInput = document.createElement('input');
+      totalInput.type = 'hidden';
+      totalInput.name = 'total';
+      totalInput.value = parseFloat(document.getElementById('total').textContent);
+      orderForm.appendChild(totalInput);
+
+      orderForm.submit(); // Submit the form to place_order.php
+    }
+
+    // Initial menu display
+    displayMenu(menuItems);
+  </script>
+</body>
+</html>
